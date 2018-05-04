@@ -20,28 +20,43 @@ namespace LotteryResult.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<result>()
+                .Property(e => e.result_a)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<result>()
+                .Property(e => e.result_b)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<result>()
+                .Property(e => e.result_final)
+                .IsUnicode(false);
+
             modelBuilder.Entity<reward_type>()
                 .Property(e => e.format)
                 .IsUnicode(false);
 
             modelBuilder.Entity<reward_type>()
-                .HasMany(e => e.result)
-                .WithRequired(e => e.reward_type)
-                .HasForeignKey(e => e.reward_type_id);
+                .Property(e => e.reward_amount)
+                .IsUnicode(false);
 
             modelBuilder.Entity<reward_type>()
-                .HasOptional(e => e.reward_type1)
-                .WithRequired(e => e.reward_type2);
+                .HasMany(e => e.result)
+                .WithRequired(e => e.reward_type)
+                .HasForeignKey(e => e.reward_type_id)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<role>()
                 .HasMany(e => e.user)
-                .WithOptional(e => e.role)
-                .HasForeignKey(e => e.role_id);
+                .WithRequired(e => e.role)
+                .HasForeignKey(e => e.role_id)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<round>()
                 .HasMany(e => e.result)
                 .WithRequired(e => e.round)
-                .HasForeignKey(e => e.round_id);
+                .HasForeignKey(e => e.round_id)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<user>()
                 .Property(e => e.hashed_password)
@@ -63,6 +78,18 @@ namespace LotteryResult.Models
                 .HasMany(e => e.result2)
                 .WithRequired(e => e.user2)
                 .HasForeignKey(e => e.result_final_userid)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<user>()
+                .HasMany(e => e.reward_type)
+                .WithRequired(e => e.user)
+                .HasForeignKey(e => e.create_by)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<user>()
+                .HasMany(e => e.round)
+                .WithRequired(e => e.user)
+                .HasForeignKey(e => e.create_by)
                 .WillCascadeOnDelete(false);
         }
     }

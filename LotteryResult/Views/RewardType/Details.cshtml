@@ -1,0 +1,67 @@
+﻿@model LotteryResult.Models.reward_type
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>รายละเอียด</h2>
+
+<div>
+    <h4>ข้อมูลประเภทรางวัล</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.instance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.instance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.format)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.format)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reward_amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reward_amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_timestamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_timestamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("แก้ไข", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")
+</p>

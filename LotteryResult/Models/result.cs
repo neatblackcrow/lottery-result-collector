@@ -23,36 +23,42 @@ namespace LotteryResult.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int reward_type_id { get; set; }
 
-        public short reward_order { get; set; }
+        public int reward_order { get; set; }
 
-        public short result_order { get; set; }
+        [Key]
+        [Column(Order = 3)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int result_order { get; set; }
 
-        public int result_a { get; set; }
+        [StringLength(50)]
+        public string result_a { get; set; }
 
         public DateTime result_a_timestamp { get; set; }
 
         public int result_a_userid { get; set; }
 
-        public int result_b { get; set; }
+        [StringLength(50)]
+        public string result_b { get; set; }
 
         public DateTime result_b_timestamp { get; set; }
 
         public int result_b_userid { get; set; }
 
-        public int result_final { get; set; }
+        [StringLength(50)]
+        public string result_final { get; set; }
 
         public DateTime result_final_timestamp { get; set; }
 
         public int result_final_userid { get; set; }
+
+        public virtual reward_type reward_type { get; set; }
+
+        public virtual round round { get; set; }
 
         public virtual user user { get; set; }
 
         public virtual user user1 { get; set; }
 
         public virtual user user2 { get; set; }
-
-        public virtual reward_type reward_type { get; set; }
-
-        public virtual round round { get; set; }
     }
 }

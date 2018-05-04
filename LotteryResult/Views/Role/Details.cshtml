@@ -1,0 +1,27 @@
+﻿@model LotteryResult.Models.role
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>รายละเอียด</h2>
+
+<div>
+    <h4>ผู้ใช้งาน</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("แก้ไข", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")
+</p>

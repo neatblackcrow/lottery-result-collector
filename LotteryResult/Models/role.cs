@@ -20,7 +20,8 @@ namespace LotteryResult.Models
         public byte id { get; set; }
 
         [Required]
-        [DisplayName("role")]
+        [StringLength(100)]
+        [Display(ResourceType = typeof(Resources), Name = "display_name_role")]
         public string name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

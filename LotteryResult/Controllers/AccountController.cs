@@ -1,0 +1,110 @@
+﻿using LotteryResult.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using LotteryResult.Models.AnonymousModels;
+using System.Security.Cryptography;
+using System.Web.Security;
+using System.Security.Principal;
+
+namespace LotteryResult.Controllers
+{
+    public class AccountController : Controller
+    {
+
+        private LottoResultContext _dbContext = new LottoResultContext();
+
+        // GET
+        public ActionResult Redirector()
+        {
+
+            if (HttpContext.Request.IsAuthenticated && HttpContext.User is GenericPrincipal)
+            {
+                GenericPrincipal principal = (GenericPrincipal) HttpContext.User;
+                FormsIdentity identity = (FormsIdentity) principal.Identity;
+
+                if (identity.IsAuthenticated)
+                {
+                    // Only get a first role.
+                    switch (principal.Claims.Where(c => c.Type == identity.RoleClaimType).First().Value)
+                    {
+                        case "กองออกรางวัล":
+                            return RedirectToAction("Index", "Round");
+                        case "ประชาสัมพันธ์":
+                            return RedirectToAction("Index", "Round");
+                        case "ผู้บันทึกผลรางวัล":
+                            return RedirectToAction("Index", "Round");
+                        case "ผู้ตรวจสอบการบันทึกผลรางวัล":
+                            return RedirectToAction("Index", "Round");
+                    }
+                    
+                }
+            }
+
+            return RedirectToAction("LogIn");
+        }
+
+        // GET
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogIn(userLogin user, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                string hashedPassword = Utility.computeMd5Hash(MD5.Create(), user.hashed_password);
+
+                try
+                {
+                    var foundUser = _dbContext.user.Where(u => u.username == user.username &&
+                                                          u.hashed_password == hashedPassword).Single();
+
+                    FormsAuthentication.SetAuthCookie(foundUser.username, false);
+
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, foundUser.username, DateTime.Now, DateTime.Now.AddMinutes(20), false, foundUser.role.name);
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+
+                    if (returnUrl != null)
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Redirector");
+                    }
+
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ModelState.AddModelError("", "รหัสผู้ใช้หรือรหัสผ่านผิด");
+                    return View(user);
+                }
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
+                return View(user);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LogIn", "Account");
+        }
+
+    }
+}

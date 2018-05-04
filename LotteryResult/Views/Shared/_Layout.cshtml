@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Principal
+@using System.Web.Security
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ระบบออกรางวัล</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,14 +19,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ระบบออกรางวัล", "Redirector", "Account", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (HttpContext.Current.Request.IsAuthenticated && HttpContext.Current.User is GenericPrincipal)
+                    {
+                        GenericPrincipal principal = (GenericPrincipal)HttpContext.Current.User;
+                        FormsIdentity identity = (FormsIdentity)principal.Identity;
+                        switch (principal.Claims.Where(c => c.Type == identity.RoleClaimType).First().Value)
+                        {
+                            case "กองออกรางวัล":
+                                <li>@Html.ActionLink("งวดออกรางวัล", "Index", "Round")</li>
+                                <li>@Html.ActionLink("ประเภทของรางวัล", "Index", "RewardType")</li>
+                                break;
+                            case "ประชาสัมพันธ์":
+                                <li>@Html.ActionLink("ข้อความโฆษณา", "Index", "Round")</li>
+                                break;
+                            case "ผู้บันทึกผลรางวัล":
+                                <li>@Html.ActionLink("ผลรางวัล", "Index", "Result")</li>
+                                break;
+                            case "ผู้ตรวจสอบการบันทึกผลรางวัล":
+                                <li>@Html.ActionLink("ผลรางวัล", "Index", "Result")</li>
+                                <li>@Html.ActionLink("ผู้ใช้งานระบบ", "Index", "User")</li>
+                                <li>@Html.ActionLink("บทบาทผู้ใช้", "Index", "Role")</li>
+                                break;
+                        }
+                    }
                 </ul>
+                @Html.Partial("~/Views/Shared/_LoginPartial.cshtml")
             </div>
         </div>
     </div>
@@ -31,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ระบบออกรางวัล</p>
         </footer>
     </div>
 

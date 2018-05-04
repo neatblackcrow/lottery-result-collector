@@ -1,175 +1,185 @@
-﻿using LotteryResult.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using LotteryResult.Models;
+using System.Security.Cryptography;
+using System.Text;
+using LotteryResult.Models.AnonymousModels;
 
 namespace LotteryResult.Controllers
 {
     public class UserController : Controller
     {
-        private LottoResultContext _db = new LottoResultContext();
+
+        private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: User
         public ActionResult Index()
         {
-            return View(_db.user.ToList());
+            return View(_dbContext.user.ToArray());
         }
 
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            user selectedUser = _db.user.Find(id);
+            user u = _dbContext.user.Find(id);
 
-            if (selectedUser == null)
+            if (u == null)
             {
                 return RedirectToAction("Index");
             }
-
-            return View(selectedUser);
+            return View(u);
         }
 
         // GET: User/Create
         public ActionResult Create()
         {
-            List<SelectListItem> role_id = new List<SelectListItem>();
-            List<role>.Enumerator roleIterator = _db.role.ToList().GetEnumerator();
+            ViewBag.role_id = generateRoleListItem();
 
-            while (roleIterator.MoveNext()) {
-                role r = roleIterator.Current;
-                role_id.Add(new SelectListItem() { Text = r.name, Value = r.id.ToString() });
-            }
-
-            ViewBag.role_id = role_id;
             return View();
         }
 
         // POST: User/Create
         [HttpPost]
-        public ActionResult Create(user user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(user u)
         {
+            u.create_timestamp = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    user.hashed_password = computeMd5Hash(MD5.Create(), user.hashed_password);
-                    _db.user.Add(user);
-                    _db.SaveChanges();
+                    u.hashed_password = Utility.computeMd5Hash(MD5.Create(), u.hashed_password);
+
+                    _dbContext.user.Add(u);
+                    _dbContext.SaveChanges();
+
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    return View();
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.role_id = generateRoleListItem();
+                    return View(u);
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Please enter data with correct formating.");
-                return View(user);
+                ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
+                ViewBag.role_id = generateRoleListItem();
+                return View(u);
             }
         }
 
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            List<SelectListItem> role_id = new List<SelectListItem>();
-            List<role>.Enumerator roleIterator = _db.role.ToList().GetEnumerator();
 
-            while (roleIterator.MoveNext())
+            user u = _dbContext.user.Find(id);
+
+            if (u == null)
             {
-                role r = roleIterator.Current;
-                role_id.Add(new SelectListItem() { Text = r.name, Value = r.id.ToString() });
+                return RedirectToAction("Index");
             }
+            else
+            {
+                ViewBag.role_id = generateRoleListItem();
 
-            ViewBag.role_id = role_id;
-            return View(_db.user.Find(id));
+                return View(u);
+            }
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, user user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, userChange u)
         {
-            try
+            if (ModelState.IsValid)
             {
-                user changedUser = _db.user.Find(id);
-                changedUser.username = user.username;
-                changedUser.hashed_password = computeMd5Hash(MD5.Create(), user.hashed_password);
-                changedUser.role_id = user.role_id;
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    user changingUser = _dbContext.user.Find(id);
+                    string oldPasswordHash = Utility.computeMd5Hash(MD5.Create(), u.old_password);
+
+                    if (changingUser.hashed_password == oldPasswordHash)
+                    {
+                        changingUser.username = u.username;
+                        changingUser.hashed_password = Utility.computeMd5Hash(MD5.Create(), u.hashed_password);
+                        changingUser.firstname = u.firstname;
+                        changingUser.lastname = u.lastname;
+                        changingUser.role_id = u.role_id;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
+                        ViewBag.role_id = generateRoleListItem();
+                        return View(u);
+                    }
+
+                    _dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.role_id = generateRoleListItem();
+                    return View(u);
+                }
             }
-            catch
+            else
             {
-                return View();
+                ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
+                ViewBag.role_id = generateRoleListItem();
+                return View(u);
             }
         }
 
         // GET: User/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(_db.user.Find(id));
+            user u = _dbContext.user.Find(id);
+
+            if (u == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(u);
         }
 
         // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, user user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, user u)
         {
             try
             {
-                user removedUser = _db.user.Find(id);
-                _db.user.Remove(removedUser);
-                _db.SaveChanges();
+                user removingUser = _dbContext.user.Find(id);
+                _dbContext.user.Remove(removingUser);
+                _dbContext.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(u);
             }
         }
 
-        // Custom methods go here...
-
-        private string computeMd5Hash(MD5 md5Hash, string input)
+        private List<SelectListItem> generateRoleListItem()
         {
-
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data 
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
+            List<SelectListItem> roleListItem = new List<SelectListItem>();
+            List<role>.Enumerator roleIterator = _dbContext.role.ToList().GetEnumerator();
+            while (roleIterator.MoveNext())
             {
-                sBuilder.Append(data[i].ToString("x2"));
+                role r = roleIterator.Current;
+                roleListItem.Add(new SelectListItem() { Text = r.name, Value = r.id.ToString() });
             }
 
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
-        }
-
-        // Verify a hash against a string.
-        private bool verifyMd5Hash(MD5 md5Hash, string input, string hash)
-        {
-            // Hash the input.
-            string hashOfInput = computeMd5Hash(md5Hash, input);
-
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            if (0 == comparer.Compare(hashOfInput, hash))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return roleListItem;
         }
     }
 }

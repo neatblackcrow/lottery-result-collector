@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>รายการผู้ใช้งาน</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("สร้าง", "Create")
 </p>
 <table class="table">
     <tr>
@@ -20,6 +20,15 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.hashed_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.create_timestamp)
         </th>
         <th></th>
     </tr>
@@ -36,9 +45,18 @@
             @Html.DisplayFor(modelItem => item.hashed_password)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.create_timestamp)
+        </td>
+        <td>
+            @Html.ActionLink("แก้ไข", "Edit", new { id=item.id }) |
+            @Html.ActionLink("รายละเอียด", "Details", new { id=item.id }) |
+            @Html.ActionLink("ลบ", "Delete", new { id=item.id })
         </td>
     </tr>
 }
