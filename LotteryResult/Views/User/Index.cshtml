@@ -22,6 +22,9 @@
             @Html.DisplayNameFor(model => model.hashed_password)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.old_password)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.firstname)
         </th>
         <th>
@@ -43,6 +46,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.hashed_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.old_password)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.firstname)

@@ -33,6 +33,10 @@ namespace LotteryResult.Models
         [DataType(DataType.Password)]
         public string hashed_password { get; set; }
 
+        [Display(ResourceType = typeof(Resources), Name = "display_name_old_password")]
+        [DataType(DataType.Password)]
+        public string old_password { get; set; }
+
         [Required]
         [StringLength(50)]
         [Display(ResourceType = typeof(Resources), Name = "display_name_firstname")]

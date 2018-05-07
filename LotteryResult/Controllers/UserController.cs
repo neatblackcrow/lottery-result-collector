@@ -47,6 +47,7 @@ namespace LotteryResult.Controllers
         public ActionResult Create(user u)
         {
             u.create_timestamp = DateTime.Now;
+            u.old_password = null;
 
             if (ModelState.IsValid)
             {
@@ -95,7 +96,7 @@ namespace LotteryResult.Controllers
         // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, userChange u)
+        public ActionResult Edit(int id, user u)
         {
             if (ModelState.IsValid)
             {
@@ -108,6 +109,7 @@ namespace LotteryResult.Controllers
                     {
                         changingUser.username = u.username;
                         changingUser.hashed_password = Utility.computeMd5Hash(MD5.Create(), u.hashed_password);
+                        changingUser.old_password = oldPasswordHash;
                         changingUser.firstname = u.firstname;
                         changingUser.lastname = u.lastname;
                         changingUser.role_id = u.role_id;
