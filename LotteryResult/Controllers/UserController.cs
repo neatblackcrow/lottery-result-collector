@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using LotteryResult.Models;
 using System.Security.Cryptography;
 using System.Text;
-using LotteryResult.Models.AnonymousModels;
+using LotteryResult.Models.ViewModels;
 
 namespace LotteryResult.Controllers
 {

@@ -168,8 +168,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnonymousModels\userChange.cs" />
-    <Compile Include="Models\AnonymousModels\userLogin.cs" />
+    <Compile Include="Models\ViewModels\userChange.cs" />
+    <Compile Include="Models\ViewModels\userLogin.cs" />
     <Compile Include="Models\LottoResultContext.cs" />
     <Compile Include="Models\result.cs" />
     <Compile Include="Models\reward_type.cs" />

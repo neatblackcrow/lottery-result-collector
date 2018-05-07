@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace LotteryResult.Models.AnonymousModels
+namespace LotteryResult.Models.ViewModels
 {
     public class userChange
     {

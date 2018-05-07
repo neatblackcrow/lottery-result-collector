@@ -1,10 +1,9 @@
 ﻿using LotteryResult.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LotteryResult.Models.AnonymousModels;
+using LotteryResult.Models.ViewModels;
 using System.Security.Cryptography;
 using System.Web.Security;
 using System.Security.Principal;
@@ -66,12 +65,20 @@ namespace LotteryResult.Controllers
                     var foundUser = _dbContext.user.Where(u => u.username == user.username &&
                                                           u.hashed_password == hashedPassword).Single();
 
+                    /*
+                     * 
+                     * Cookie only stores security information, username and role(s) and Session Id for 20 minutes
+                     * 
+                     * 
+                    */
                     FormsAuthentication.SetAuthCookie(foundUser.username, false);
-
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, foundUser.username, DateTime.Now, DateTime.Now.AddMinutes(20), false, foundUser.role.name);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
+
+                    // Anything else...
+                    HttpContext.Session.Add("user", foundUser);
 
                     if (returnUrl != null)
                     {
@@ -102,6 +109,7 @@ namespace LotteryResult.Controllers
         public ActionResult LogOff()
         {
             // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            HttpContext.Session.Abandon();
             FormsAuthentication.SignOut();
             return RedirectToAction("LogIn", "Account");
         }

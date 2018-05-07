@@ -13,7 +13,7 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: Round
-        [Authorize (Roles = "กองออกรางวัล")]
+        //[Authorize (Roles = "กองออกรางวัล")]
         public ActionResult Index()
         {
             return View(_dbContext.round.ToArray());
@@ -34,8 +34,6 @@ namespace LotteryResult.Controllers
         // GET: Round/Create
         public ActionResult Create()
         {
-            ViewBag.create_by = generateUserListItem();
-
             return View();
         }
 
@@ -46,6 +44,7 @@ namespace LotteryResult.Controllers
         {
             r.create_timestamp = DateTime.Now;
             r.advertise_msg = null;
+            r.create_by = ((user)HttpContext.Session["user"]).id;
 
             if (ModelState.IsValid)
             {
@@ -59,14 +58,12 @@ namespace LotteryResult.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    ViewBag.role_id = generateUserListItem();
                     return View(r);
                 }
             }
             else
             {
                 ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
-                ViewBag.role_id = generateUserListItem();
                 return View(r);
             }
         }
@@ -83,7 +80,6 @@ namespace LotteryResult.Controllers
             }
             else
             {
-                ViewBag.create_by = generateUserListItem();
 
                 return View(r);
             }
@@ -102,7 +98,6 @@ namespace LotteryResult.Controllers
 
                     changingRound.date = r.date;
                     changingRound.round1 = r.round1;
-                    changingRound.create_by = r.create_by;
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -110,14 +105,12 @@ namespace LotteryResult.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    ViewBag.role_id = generateUserListItem();
                     return View(r);
                 }
             }
             else
             {
                 ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
-                ViewBag.role_id = generateUserListItem();
                 return View(r);
             }
         }
@@ -152,19 +145,6 @@ namespace LotteryResult.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(r);
             }
-        }
-
-        private List<SelectListItem> generateUserListItem()
-        {
-            List<SelectListItem> userListItem = new List<SelectListItem>();
-            List<user>.Enumerator userIterator = _dbContext.user.ToList().GetEnumerator();
-            while (userIterator.MoveNext())
-            {
-                user u = userIterator.Current;
-                userListItem.Add(new SelectListItem() { Text = u.firstname + " " + u.lastname, Value = u.id.ToString() });
-            }
-
-            return userListItem;
         }
     }
 }
