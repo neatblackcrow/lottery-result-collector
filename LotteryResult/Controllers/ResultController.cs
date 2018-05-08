@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LotteryResult.Controllers
 {
+    [Authorize]
     public class ResultController : Controller
     {
         // GET: Result

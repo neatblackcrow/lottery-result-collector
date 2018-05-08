@@ -10,6 +10,7 @@ using LotteryResult.Models.ViewModels;
 
 namespace LotteryResult.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
 
@@ -87,7 +88,6 @@ namespace LotteryResult.Controllers
             }
             else
             {
-                ViewBag.role_id = generateRoleListItem();
 
                 return View(u);
             }

@@ -10,12 +10,14 @@ using System.Security.Principal;
 
 namespace LotteryResult.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
 
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET
+        [AllowAnonymous]
         public ActionResult Redirector()
         {
 
@@ -32,11 +34,11 @@ namespace LotteryResult.Controllers
                         case "กองออกรางวัล":
                             return RedirectToAction("Index", "Round");
                         case "ประชาสัมพันธ์":
-                            return RedirectToAction("Index", "Round");
+                            return RedirectToAction("Index", "AdMessage");
                         case "ผู้บันทึกผลรางวัล":
-                            return RedirectToAction("Index", "Round");
+                            return RedirectToAction("Index", "Result");
                         case "ผู้ตรวจสอบการบันทึกผลรางวัล":
-                            return RedirectToAction("Index", "Round");
+                            return RedirectToAction("Index", "Result");
                     }
                     
                 }
@@ -46,6 +48,7 @@ namespace LotteryResult.Controllers
         }
 
         // GET
+        [AllowAnonymous]
         public ActionResult LogIn()
         {
             return View();
@@ -54,6 +57,7 @@ namespace LotteryResult.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogIn(userLogin user, string returnUrl)
         {
             if (ModelState.IsValid)

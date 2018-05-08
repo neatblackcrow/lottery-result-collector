@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace LotteryResult.Controllers
 {
+    [Authorize]
     public class AdMessageController : Controller
     {
 
@@ -28,39 +29,6 @@ namespace LotteryResult.Controllers
                 return RedirectToAction("Index");
             }
             return View(r);
-        }
-
-        // GET: AdMessage/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AdMessage/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(round r)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _dbContext.round.Add(r);
-                    _dbContext.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", ex.Message);
-                    return View(r);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "กรุณากรอกข้อมูลให้ถูกต้อง");
-                return View(r);
-            }
         }
 
         // GET: AdMessage/Edit/5
@@ -90,8 +58,7 @@ namespace LotteryResult.Controllers
                 {
                     round changingRound = _dbContext.round.Find(id);
 
-                    changingRound.date = r.date;
-                    changingRound.round1 = r.round1;
+                    changingRound.advertise_msg = r.advertise_msg;
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -129,7 +96,8 @@ namespace LotteryResult.Controllers
             try
             {
                 round removingRound = _dbContext.round.Find(id);
-                _dbContext.round.Remove(removingRound);
+                removingRound.advertise_msg = null;
+
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");

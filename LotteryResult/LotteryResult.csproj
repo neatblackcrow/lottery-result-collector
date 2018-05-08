@@ -341,6 +341,9 @@
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\AdMessage\Index.cshtml" />
+    <Content Include="Views\AdMessage\Edit.cshtml" />
+    <Content Include="Views\AdMessage\Delete.cshtml" />
+    <Content Include="Views\AdMessage\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

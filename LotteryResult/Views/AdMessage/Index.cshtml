@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>รายการข้อความโฆษณา</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -48,9 +45,9 @@
             @Html.DisplayFor(modelItem => item.create_timestamp)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("แก้ไข", "Edit", new { id=item.id }) |
+            @Html.ActionLink("รายละเอียด", "Details", new { id=item.id }) |
+            @Html.ActionLink("ลบ", "Delete", new { id=item.id })
         </td>
     </tr>
 }

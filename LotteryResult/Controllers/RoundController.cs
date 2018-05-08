@@ -7,6 +7,7 @@ using LotteryResult.Models;
 
 namespace LotteryResult.Controllers
 {
+    [Authorize]
     public class RoundController : Controller
     {
 
