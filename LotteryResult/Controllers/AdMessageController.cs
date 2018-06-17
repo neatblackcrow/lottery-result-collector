@@ -52,13 +52,24 @@ namespace LotteryResult.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, round r)
         {
+            r.ad_message.create_timestamp = DateTime.Now;
+            r.ad_message.create_by = ((user)HttpContext.Session["user"]).id;
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     round changingRound = _dbContext.round.Find(id);
-
-                    changingRound.advertise_msg = r.advertise_msg;
+                    if (changingRound.ad_message == null)
+                    {
+                        changingRound.ad_message = r.ad_message;
+                    }
+                    else
+                    {
+                        changingRound.ad_message.create_by = r.ad_message.create_by;
+                        changingRound.ad_message.create_timestamp = r.ad_message.create_timestamp;
+                        changingRound.ad_message.advertise_msg = r.ad_message.advertise_msg;
+                    }
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -96,7 +107,7 @@ namespace LotteryResult.Controllers
             try
             {
                 round removingRound = _dbContext.round.Find(id);
-                removingRound.advertise_msg = null;
+                _dbContext.ad_message.Remove(removingRound.ad_message);
 
                 _dbContext.SaveChanges();
 

@@ -1,4 +1,5 @@
-﻿using LotteryResult.Models.ViewModels;
+﻿using LotteryResult.Models;
+using LotteryResult.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,29 @@ namespace LotteryResult
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            Application.Add("result_collection_stats", new ResultCollectionStats());
+        }
+
+        public class ResultCollectionStats
+        {
+            public List<RewardStatus> currentRewardList { get; set; }
+            public int currentRewardOrder { get; set; }
+            public reward_type currentReward { get; set; }
+            public int currentResultOrder { get; set; }
+            public round currentRound { get; set; }
+
+            public class RewardStatus
+            {
+                public bool isUsed { get; set; }
+                public reward_type reward { get; set; }
+            }
+
+            public ResultCollectionStats()
+            {
+                currentResultOrder = 1;
+                currentRewardOrder = 1;
+            }
         }
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)

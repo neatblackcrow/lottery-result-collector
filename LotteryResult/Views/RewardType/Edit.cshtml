@@ -11,53 +11,60 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>ข้อมูลประเภทรางวัล</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+<div class="form-horizontal">
+    <h4>ข้อมูลประเภทรางวัล</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.create_by)
+    @Html.HiddenFor(model => model.create_timestamp)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.instance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.instance, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.instance, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.format, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.format, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.format, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.reward_amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.reward_amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.reward_amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.create_by)
-        @Html.HiddenFor(model => model.create_timestamp)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="แก้ไข" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.instance, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.instance, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.instance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.format, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.format, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.format, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.reward_amount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.reward_amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.reward_amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            @Html.EditorFor(model => model.is_active)
+            @Html.LabelFor(model => model.is_active, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.is_active, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="แก้ไข" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

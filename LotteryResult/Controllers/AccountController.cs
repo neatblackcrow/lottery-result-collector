@@ -67,7 +67,8 @@ namespace LotteryResult.Controllers
                 try
                 {
                     var foundUser = _dbContext.user.Where(u => u.username == user.username &&
-                                                          u.hashed_password == hashedPassword).Single();
+                                                          u.hashed_password == hashedPassword &&
+                                                          u.is_active == true).Single();
 
                     /*
                      * 

@@ -137,6 +137,10 @@
     <value>ชื่อ</value>
     <comment>Model's display name in Thai.</comment>
   </data>
+  <data name="display_name_is_active" xml:space="preserve">
+    <value>เปิดใช้งาน</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
   <data name="display_name_lastname" xml:space="preserve">
     <value>นามสกุล</value>
     <comment>Model's display name in Thai.</comment>
@@ -147,6 +151,18 @@
   </data>
   <data name="display_name_password" xml:space="preserve">
     <value>รหัสผ่าน</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="display_name_result_confirmed" xml:space="preserve">
+    <value>ยืนยันผลรางวัล</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="display_name_result_name" xml:space="preserve">
+    <value>ผลรางวัล</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="display_name_result_order" xml:space="preserve">
+    <value>ลำดับรางวัล</value>
     <comment>Model's display name in Thai.</comment>
   </data>
   <data name="display_name_reward_amount" xml:space="preserve">
@@ -165,6 +181,10 @@
     <value>ประเภทรางวัล</value>
     <comment>Model's display name in Thai.</comment>
   </data>
+  <data name="display_name_reward_order" xml:space="preserve">
+    <value>ลำดับประเภทรางวัล</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
   <data name="display_name_role" xml:space="preserve">
     <value>บทบาท</value>
     <comment>Model's display name in Thai.</comment>
@@ -176,5 +196,121 @@
   <data name="display_name_username" xml:space="preserve">
     <value>รหัสผู้ใช้</value>
     <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="error_msg_round_range" xml:space="preserve">
+    <value>งวดจะต้องมีค่าระหว่าง 1 ถึง 52</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_date" xml:space="preserve">
+    <value>กรุณาระบุวันที่</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_firstname" xml:space="preserve">
+    <value>กรุณาระบุชื่อจริง</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_isactive" xml:space="preserve">
+    <value>กรุณากำหนดสถานะเปิดใช้งาน</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_lastname" xml:space="preserve">
+    <value>กรุณาระบุนามสกุล</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_password" xml:space="preserve">
+    <value>กรุณาระบุรหัสผ่าน</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_role" xml:space="preserve">
+    <value>กรุณาระบุบทบาท</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_round" xml:space="preserve">
+    <value>กรุณาระบุงวด</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_username" xml:space="preserve">
+    <value>กรุณาระบุรหัสผู้ใช้</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_ad_msg" xml:space="preserve">
+    <value>กรุณาระบุข้อความโฆษณา</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_ad_msg_length" xml:space="preserve">
+    <value>ข้อความโฆษณาจะต้องมีความยาวไม่เกิน 250 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_firstname_length" xml:space="preserve">
+    <value>ชื่อจริงจะต้องมีความยาวไม่เกิน 50 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_lastname_length" xml:space="preserve">
+    <value>นามสกุลจะต้องมีความยาวไม่เกิน 50 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_amount" xml:space="preserve">
+    <value>กรุณาระบุจำนวนเงินรางวัล</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_amount_length" xml:space="preserve">
+    <value>จำนวนเงินรางวัลมีความยาวไม่เกิน 50 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_format" xml:space="preserve">
+    <value>กรุณาระบุรูปแบบของข้อมูลรางวัล</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_format_length" xml:space="preserve">
+    <value>รูปแบบของข้อมูลรางวัลมีความไม่เกิน 50 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_instance" xml:space="preserve">
+    <value>กรุณาระบุจำนวนรางวัล</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_instance_range" xml:space="preserve">
+    <value>จำนวนรางวัลจะต้องมีค่ามากกว่า 1</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_name" xml:space="preserve">
+    <value>กรุณาระบุประเภทรางวัล</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_reward_name_length" xml:space="preserve">
+    <value>ประเภทรางวัลจะต้องมีความยาวไม่เกิน 100 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_role_length" xml:space="preserve">
+    <value>บทบาทจะต้องมีความยาวไม่เกิน 100 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_username_length" xml:space="preserve">
+    <value>รหัสผู้ใช้จะต้องมีความยาวไม่เกิน 50 ตัวอักษร</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="display_name_confirm_password" xml:space="preserve">
+    <value>ยืนยันรหัสผ่านใหม่</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="display_name_new_password" xml:space="preserve">
+    <value>รหัสผ่านใหม่</value>
+    <comment>Model's display name in Thai.</comment>
+  </data>
+  <data name="error_msg_confirm_password" xml:space="preserve">
+    <value>กรุณายืนยันรหัสผ่านใหม่</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_confirm_password_compare" xml:space="preserve">
+    <value>รหัสผ่านใหม่ไม่ตรงกัน</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_new_password" xml:space="preserve">
+    <value>กรุณาระบุรหัสผ่านใหม่</value>
+    <comment>Error message in Thai.</comment>
+  </data>
+  <data name="error_msg_old_password" xml:space="preserve">
+    <value>กรุณาระบุรหัสผ่านเดิม</value>
+    <comment>Error message in Thai.</comment>
   </data>
 </root>

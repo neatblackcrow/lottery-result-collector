@@ -12,7 +12,7 @@
                     @HttpContext.Current.User.Identity.Name <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>@Html.ActionLink("แก้ไขข้อมูลผู้ใช้", "Edit", "User", routeValues: new { id = ((user) Session["user"]).id }, htmlAttributes: new { @class = "dropdown-item" })</li>
+                    <li>@Html.ActionLink("แก้ไขข้อมูลผู้ใช้", "UserEdit", "User", routeValues: new { }, htmlAttributes: new { @class = "dropdown-item" })</li>
                     <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">ออกจากระบบ</a></li>
                 </ul>
             </li>

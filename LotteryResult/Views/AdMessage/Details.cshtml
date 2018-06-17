@@ -11,13 +11,6 @@
     <h4>ข้อความโฆษณา</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.user.username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.user.username)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.date)
@@ -36,19 +29,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.advertise_msg)
+            @Html.DisplayNameFor(model => model.ad_message.user.username)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.advertise_msg)
+            @Html.DisplayFor(model => model.ad_message.user.username)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.create_timestamp)
+            @Html.DisplayNameFor(model => model.ad_message.create_timestamp)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.create_timestamp)
+            @Html.DisplayFor(model => model.ad_message.create_timestamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ad_message.advertise_msg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ad_message.advertise_msg)
         </dd>
 
     </dl>

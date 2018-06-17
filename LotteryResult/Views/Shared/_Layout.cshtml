@@ -1,5 +1,6 @@
 ﻿@using System.Security.Principal
 @using System.Web.Security
+@using LotteryResult.Helpers
 
 <!DOCTYPE html>
 <html>
@@ -9,9 +10,10 @@
     <title>@ViewBag.Title - ระบบออกรางวัล</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,22 +32,42 @@
                         switch (principal.Claims.Where(c => c.Type == identity.RoleClaimType).First().Value)
                         {
                             case "กองออกรางวัล":
-                                <li>@Html.ActionLink("งวดออกรางวัล", "Index", "Round")</li>
-                                <li>@Html.ActionLink("ประเภทของรางวัล", "Index", "RewardType")</li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Round")">
+                                    @Html.ActionLink("งวดออกรางวัล", "Index", "Round")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "RewardType")">
+                                    @Html.ActionLink("ประเภทของรางวัล", "Index", "RewardType")
+                                </li>
                                 break;
                             case "ประชาสัมพันธ์":
-                                <li>@Html.ActionLink("ข้อความโฆษณา", "Index", "AdMessage")</li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "AdMessage")">
+                                    @Html.ActionLink("ข้อความโฆษณา", "Index", "AdMessage")
+                                </li>
                                 break;
                             case "ผู้บันทึกผลรางวัล":
-                                <li>@Html.ActionLink("ผลรางวัล", "Index", "Result")</li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Result")">
+                                    @Html.ActionLink("ผลรางวัล", "Index", "Result")
+                                </li>
                                 break;
                             case "ผู้ตรวจสอบการบันทึกผลรางวัล":
-                                <li>@Html.ActionLink("ผลรางวัล", "Index", "Result")</li>
-                                <li>@Html.ActionLink("ผู้ใช้งานระบบ", "Index", "User")</li>
-                                <li>@Html.ActionLink("บทบาทผู้ใช้", "Index", "Role")</li>
-                                <li>@Html.ActionLink("งวดออกรางวัล", "Index", "Round")</li>
-                                <li>@Html.ActionLink("ประเภทของรางวัล", "Index", "RewardType")</li>
-                                <li>@Html.ActionLink("ข้อความโฆษณา", "Index", "AdMessage")</li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Result")">
+                                    @Html.ActionLink("ผลรางวัล", "Index", "Result")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "User")">
+                                    @Html.ActionLink("ผู้ใช้งานระบบ", "Index", "User")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Role")">
+                                    @Html.ActionLink("บทบาทผู้ใช้", "Index", "Role")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Round")">
+                                    @Html.ActionLink("งวดออกรางวัล", "Index", "Round")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "RewardType")">
+                                    @Html.ActionLink("ประเภทของรางวัล", "Index", "RewardType")
+                                </li>
+                                <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "AdMessage")">
+                                    @Html.ActionLink("ข้อความโฆษณา", "Index", "AdMessage")
+                                </li>
                                 break;
                         }
                     }
@@ -64,6 +86,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/react")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/custom-global")
 </body>
 </html>

@@ -9,9 +9,11 @@
 
 <h3>ยืนยันการลบบทบาท ?</h3>
 <div>
+
     <h4>ข้อมูลบทบาท</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.name)
@@ -23,9 +25,9 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
             <input type="submit" value="ยืนยัน" class="btn btn-default" /> |
             @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")

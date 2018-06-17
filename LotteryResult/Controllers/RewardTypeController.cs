@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -100,6 +102,7 @@ namespace LotteryResult.Controllers
                     changingReward.instance = r.instance;
                     changingReward.format = r.format;
                     changingReward.reward_amount = r.reward_amount;
+                    changingReward.is_active = r.is_active;
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -142,10 +145,28 @@ namespace LotteryResult.Controllers
 
                 return RedirectToAction("Index");
             }
+            catch (DbUpdateException exception)
+            {
+                SqlException ex = (SqlException)exception.InnerException.InnerException;
+
+                if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
+                {
+                    var rewardType = _dbContext.reward_type.Find(id);
+                    ModelState.AddModelError("", "ไม่สามารถลบประเภทรางวัลได้ เนื่องจากประเภทรางวัลได้ถูกใช้ในระบบเรียบร้อยแล้ว ให้ปิดใช้งานประเภทรางวัลแทน");
+                    return View(rewardType);
+                }
+                else
+                {
+                    var rewardType = _dbContext.reward_type.Find(id);
+                    ModelState.AddModelError("", ex.Message);
+                    return View(rewardType);
+                }
+            }
             catch (Exception ex)
             {
+                var rewardType = _dbContext.reward_type.Find(id);
                 ModelState.AddModelError("", ex.Message);
-                return View(r);
+                return View(rewardType);
             }
         }
     }

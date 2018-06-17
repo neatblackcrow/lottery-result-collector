@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -44,7 +46,6 @@ namespace LotteryResult.Controllers
         public ActionResult Create(round r)
         {
             r.create_timestamp = DateTime.Now;
-            r.advertise_msg = null;
             r.create_by = ((user)HttpContext.Session["user"]).id;
 
             if (ModelState.IsValid)
@@ -81,7 +82,7 @@ namespace LotteryResult.Controllers
             }
             else
             {
-
+                
                 return View(r);
             }
         }
@@ -141,10 +142,28 @@ namespace LotteryResult.Controllers
 
                 return RedirectToAction("Index");
             }
+            catch (DbUpdateException exception)
+            {
+                SqlException ex = (SqlException)exception.InnerException.InnerException;
+
+                if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
+                {
+                    var round = _dbContext.round.Find(id);
+                    ModelState.AddModelError("", "ไม่สามารถลบงวดได้ เนื่องจากงวดได้ถูกใช้ในระบบเรียบร้อยแล้ว");
+                    return View(round);
+                }
+                else
+                {
+                    var round = _dbContext.round.Find(id);
+                    ModelState.AddModelError("", ex.Message);
+                    return View(round);
+                }
+            }
             catch (Exception ex)
             {
+                var round = _dbContext.round.Find(id);
                 ModelState.AddModelError("", ex.Message);
-                return View(r);
+                return View(round);
             }
         }
     }

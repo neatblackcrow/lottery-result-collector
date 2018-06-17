@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using LotteryResult.Models;
@@ -127,10 +130,44 @@ namespace LotteryResult.Controllers
 
                 return RedirectToAction("Index");
             }
+            catch (DbUpdateException exception)
+            {
+                SqlException ex = (SqlException) exception.InnerException.InnerException;
+
+                if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
+                {
+                    var removingRole = _dbContext.role.Find(id);
+                    _dbContext.Entry(removingRole).State = System.Data.Entity.EntityState.Unchanged;
+
+                    StringBuilder finalMessage = new StringBuilder("ไม่สามารถลบบทบาทได้ เนื่องจากบทบาทถูกใช้โดยผู้ใช้ ดังต่อไปนี้: ");
+                    List<user> effectedUser = removingRole.user.ToList();
+                    for (int i = 0; i < effectedUser.Count; i++)
+                    {
+                        if (i == effectedUser.Count - 1)
+                        {
+                            finalMessage.Append(effectedUser[i].username);
+                        }
+                        else
+                        {
+                            finalMessage.Append(effectedUser[i].username + " ,");
+                        }
+                    }
+                    ModelState.AddModelError("", finalMessage.ToString());
+                    return View(removingRole);
+                }
+                else
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    var removingRole = _dbContext.role.Find(id);
+                    return View(removingRole);
+                }
+
+            }
             catch (Exception ex)
             {
+                var removingRole = _dbContext.role.Find(id);
                 ModelState.AddModelError("", ex.Message);
-                return View(r);
+                return View(removingRole);
             }
         }
     }

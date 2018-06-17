@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LotteryResult.Models.ViewModels.resultViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>รายการผลรางวัล</h2>
+
+<p>
+    @Html.ActionLink("สร้าง", "Create")
+</p>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.round)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.round_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reward_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reward_order)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.result_order)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.confirmed_result)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.round)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.round_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reward_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reward_order)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.result_order)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.confirmed_result)
+        </td>
+    </tr>
+}
+
+</table>

@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("สร้าง", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.user.username)
@@ -29,6 +29,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.create_timestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_active)
         </th>
         <th></th>
     </tr>
@@ -54,9 +57,12 @@
             @Html.DisplayFor(modelItem => item.create_timestamp)
         </td>
         <td>
-            @Html.ActionLink("แก้ไข", "Edit", new { id=item.id }) |
-            @Html.ActionLink("รายละเอียด", "Details", new { id=item.id }) |
-            @Html.ActionLink("ลบ", "Delete", new { id=item.id })
+            @Html.DisplayFor(modelItem => item.is_active)
+        </td>
+        <td>
+            @Html.ActionLink("แก้ไข", "Edit", new { id = item.id }) |
+            @Html.ActionLink("รายละเอียด", "Details", new { id = item.id }) |
+            @Html.ActionLink("ลบ", "Delete", new { id = item.id })
         </td>
     </tr>
 }

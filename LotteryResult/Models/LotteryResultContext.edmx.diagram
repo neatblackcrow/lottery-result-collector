@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a00a8db2381244ca94b0a33f815496af" Name="Diagram1">
+        <EntityTypeShape EntityType="LottoResultModel.result" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LottoResultModel.reward_type" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LottoResultModel.role" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LottoResultModel.round" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="LottoResultModel.user" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="LottoResultModel.FK_result_to_reward_type" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_result_to_round" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_result_to_userA" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_result_to_userB" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_result_to_userC" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_reward_type_to_user" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_user_to_role" ManuallyRouted="false" />
+        <AssociationConnector Association="LottoResultModel.FK_round_to_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

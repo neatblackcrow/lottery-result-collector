@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="result" EntityType="Models.Store.result" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="reward_type" EntityType="Models.Store.reward_type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="role" EntityType="Models.Store.role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="round" EntityType="Models.Store.round" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="user" EntityType="Models.Store.user" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="result_data" EntityType="Models.Store.result_data" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ad_message" EntityType="Models.Store.ad_message" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_result_to_reward_type" Association="Models.Store.FK_result_to_reward_type">
+      <End Role="reward_type" EntitySet="reward_type" />
+      <End Role="result" EntitySet="result" />
+    </AssociationSet>
+    <AssociationSet Name="FK_result_to_round" Association="Models.Store.FK_result_to_round">
+      <End Role="round" EntitySet="round" />
+      <End Role="result" EntitySet="result" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reward_type_to_user" Association="Models.Store.FK_reward_type_to_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="reward_type" EntitySet="reward_type" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_to_role" Association="Models.Store.FK_user_to_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_round_to_user" Association="Models.Store.FK_round_to_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="round" EntitySet="round" />
+    </AssociationSet>
+    <AssociationSet Name="FK_result_data_to_result" Association="Models.Store.FK_result_data_to_result">
+      <End Role="result" EntitySet="result" />
+      <End Role="result_data" EntitySet="result_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_result_data_to_user" Association="Models.Store.FK_result_data_to_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="result_data" EntitySet="result_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ad_message_to_round" Association="Models.Store.FK_ad_message_to_round">
+      <End Role="round" EntitySet="round" />
+      <End Role="ad_message" EntitySet="ad_message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ad_message_to_user" Association="Models.Store.FK_ad_message_to_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="ad_message" EntitySet="ad_message" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="result">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="round_id" Type="int" Nullable="false" />
+    <Property Name="reward_type_id" Type="int" Nullable="false" />
+    <Property Name="reward_order" Type="int" Nullable="false" />
+    <Property Name="result_order" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reward_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="instance" Type="int" Nullable="false" />
+    <Property Name="format" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="reward_amount" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+    <Property Name="create_by" Type="int" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="round">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="round1" Type="int" Nullable="false" />
+    <Property Name="create_by" Type="int" Nullable="false" />
+    <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="hashed_password" Type="varchar(max)" Nullable="false" />
+    <Property Name="old_password" Type="varchar(max)" Nullable="true" />
+    <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="lastname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="role_id" Type="tinyint" Nullable="false" />
+    <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="result_data">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="result" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+    <Property Name="create_by" Type="int" Nullable="false" />
+    <Property Name="result_id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="is_confirmed_result" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ad_message">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="advertise_msg" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="create_by" Type="int" Nullable="false" />
+    <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+    <Property Name="round_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_result_to_reward_type">
+    <End Role="reward_type" Type="Models.Store.reward_type" Multiplicity="1" />
+    <End Role="result" Type="Models.Store.result" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="reward_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="result">
+        <PropertyRef Name="reward_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_result_to_round">
+    <End Role="round" Type="Models.Store.round" Multiplicity="1" />
+    <End Role="result" Type="Models.Store.result" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="round">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="result">
+        <PropertyRef Name="round_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reward_type_to_user">
+    <End Role="user" Type="Models.Store.user" Multiplicity="1" />
+    <End Role="reward_type" Type="Models.Store.reward_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reward_type">
+        <PropertyRef Name="create_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_to_role">
+    <End Role="role" Type="Models.Store.role" Multiplicity="1" />
+    <End Role="user" Type="Models.Store.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_round_to_user">
+    <End Role="user" Type="Models.Store.user" Multiplicity="1" />
+    <End Role="round" Type="Models.Store.round" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="round">
+        <PropertyRef Name="create_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_result_data_to_result">
+    <End Role="result" Type="Models.Store.result" Multiplicity="1" />
+    <End Role="result_data" Type="Models.Store.result_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="result">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="result_data">
+        <PropertyRef Name="result_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_result_data_to_user">
+    <End Role="user" Type="Models.Store.user" Multiplicity="1" />
+    <End Role="result_data" Type="Models.Store.result_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="result_data">
+        <PropertyRef Name="create_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ad_message_to_round">
+    <End Role="round" Type="Models.Store.round" Multiplicity="1" />
+    <End Role="ad_message" Type="Models.Store.ad_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="round">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ad_message">
+        <PropertyRef Name="round_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ad_message_to_user">
+    <End Role="user" Type="Models.Store.user" Multiplicity="1" />
+    <End Role="ad_message" Type="Models.Store.ad_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ad_message">
+        <PropertyRef Name="create_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="round_id" Type="Int32" Nullable="false" />
+          <Property Name="reward_type_id" Type="Int32" Nullable="false" />
+          <Property Name="reward_order" Type="Int32" Nullable="false" />
+          <Property Name="result_order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="reward_type" Relationship="Self.FK_result_to_reward_type" FromRole="result" ToRole="reward_type" />
+          <NavigationProperty Name="round" Relationship="Self.FK_result_to_round" FromRole="result" ToRole="round" />
+          <NavigationProperty Name="result_data" Relationship="Models.FK_result_data_to_result" FromRole="result" ToRole="result_data" />
+        </EntityType>
+        <EntityType Name="reward_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="instance" Type="Int32" Nullable="false" />
+          <Property Name="format" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reward_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="create_by" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="result" Relationship="Self.FK_result_to_reward_type" FromRole="reward_type" ToRole="result" />
+          <NavigationProperty Name="user" Relationship="Self.FK_reward_type_to_user" FromRole="reward_type" ToRole="user" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_to_role" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="round">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="round1" Type="Int32" Nullable="false" />
+          <Property Name="create_by" Type="Int32" Nullable="false" />
+          <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="result" Relationship="Self.FK_result_to_round" FromRole="round" ToRole="result" />
+          <NavigationProperty Name="user" Relationship="Self.FK_round_to_user" FromRole="round" ToRole="user" />
+          <NavigationProperty Name="ad_message" Relationship="Models.FK_ad_message_to_round" FromRole="round" ToRole="ad_message" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hashed_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="old_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role_id" Type="Byte" Nullable="false" />
+          <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="reward_type" Relationship="Self.FK_reward_type_to_user" FromRole="user" ToRole="reward_type" />
+          <NavigationProperty Name="role" Relationship="Self.FK_user_to_role" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="round" Relationship="Self.FK_round_to_user" FromRole="user" ToRole="round" />
+          <NavigationProperty Name="result_data" Relationship="Models.FK_result_data_to_user" FromRole="user" ToRole="result_data" />
+          <NavigationProperty Name="ad_message" Relationship="Models.FK_ad_message_to_user" FromRole="user" ToRole="ad_message" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_result_to_reward_type">
+          <End Role="reward_type" Type="Self.reward_type" Multiplicity="1" />
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reward_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="reward_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_result_to_round">
+          <End Role="round" Type="Self.round" Multiplicity="1" />
+          <End Role="result" Type="Self.result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="round">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="result">
+              <PropertyRef Name="round_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reward_type_to_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="reward_type" Type="Self.reward_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reward_type">
+              <PropertyRef Name="create_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_to_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_round_to_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="round" Type="Self.round" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="round">
+              <PropertyRef Name="create_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LottoResultContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="result" EntityType="Self.result" />
+          <EntitySet Name="reward_type" EntityType="Self.reward_type" />
+          <EntitySet Name="role" EntityType="Self.role" />
+          <EntitySet Name="round" EntityType="Self.round" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="FK_result_to_reward_type" Association="Self.FK_result_to_reward_type">
+            <End Role="reward_type" EntitySet="reward_type" />
+            <End Role="result" EntitySet="result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_result_to_round" Association="Self.FK_result_to_round">
+            <End Role="round" EntitySet="round" />
+            <End Role="result" EntitySet="result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reward_type_to_user" Association="Self.FK_reward_type_to_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="reward_type" EntitySet="reward_type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_to_role" Association="Self.FK_user_to_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_round_to_user" Association="Self.FK_round_to_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="round" EntitySet="round" />
+          </AssociationSet>
+          <EntitySet Name="result_data" EntityType="Models.result_data" />
+          <AssociationSet Name="FK_result_data_to_result" Association="Models.FK_result_data_to_result">
+            <End Role="result" EntitySet="result" />
+            <End Role="result_data" EntitySet="result_data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_result_data_to_user" Association="Models.FK_result_data_to_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="result_data" EntitySet="result_data" />
+          </AssociationSet>
+          <EntitySet Name="ad_message" EntityType="Models.ad_message" />
+          <AssociationSet Name="FK_ad_message_to_round" Association="Models.FK_ad_message_to_round">
+            <End EntitySet="round" Role="round" />
+            <End EntitySet="ad_message" Role="ad_message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ad_message_to_user" Association="Models.FK_ad_message_to_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="ad_message" EntitySet="ad_message" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="result_data" >
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="create_by" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="result1" Relationship="Models.FK_result_data_to_result" FromRole="result_data" ToRole="result" />
+          <Property Name="result_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Models.FK_result_data_to_user" FromRole="result_data" ToRole="user" />
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="is_confirmed_result" Type="Boolean" Nullable="false" />
+          </EntityType>
+        <Association Name="FK_result_data_to_result">
+          <End Type="Models.result" Role="result" Multiplicity="1" />
+          <End Type="Models.result_data" Role="result_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="result">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="result_data">
+              <PropertyRef Name="result_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_result_data_to_user">
+          <End Type="Models.user" Role="user" Multiplicity="1" />
+          <End Type="Models.result_data" Role="result_data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="result_data">
+              <PropertyRef Name="create_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ad_message">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="advertise_msg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="create_by" Type="Int32" Nullable="false" />
+          <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="round" Relationship="Models.FK_ad_message_to_round" FromRole="ad_message" ToRole="round" />
+          <NavigationProperty Name="user" Relationship="Models.FK_ad_message_to_user" FromRole="ad_message" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_ad_message_to_round">
+          <End Type="Models.round" Multiplicity="1" Role="round" />
+          <End Type="Models.ad_message" Multiplicity="0..1" Role="ad_message" />
+        </Association>
+        <Association Name="FK_ad_message_to_user">
+          <End Type="Models.user" Role="user" Multiplicity="1" />
+          <End Type="Models.ad_message" Role="ad_message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ad_message">
+              <PropertyRef Name="create_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="LottoResultContext">
+    <EntitySetMapping Name="result">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.result)">
+        <MappingFragment StoreEntitySet="result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="round_id" ColumnName="round_id" />
+          <ScalarProperty Name="reward_type_id" ColumnName="reward_type_id" />
+          <ScalarProperty Name="reward_order" ColumnName="reward_order" />
+          <ScalarProperty Name="result_order" ColumnName="result_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reward_type">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.reward_type)">
+        <MappingFragment StoreEntitySet="reward_type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="instance" ColumnName="instance" />
+          <ScalarProperty Name="format" ColumnName="format" />
+          <ScalarProperty Name="reward_amount" ColumnName="reward_amount" />
+          <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.role)">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="round">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.round)">
+        <MappingFragment StoreEntitySet="round">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="round1" ColumnName="round1" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.user)">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="hashed_password" ColumnName="hashed_password" />
+          <ScalarProperty Name="old_password" ColumnName="old_password" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="result_data">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.result_data)">
+        <MappingFragment StoreEntitySet="result_data">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="result" ColumnName="result" />
+          <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="result_id" ColumnName="result_id" />
+          <ScalarProperty Name="is_confirmed_result" ColumnName="is_confirmed_result" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ad_message">
+      <EntityTypeMapping TypeName="IsTypeOf(Models.ad_message)">
+        <MappingFragment StoreEntitySet="ad_message">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="advertise_msg" ColumnName="advertise_msg" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_ad_message_to_round" TypeName="Models.FK_ad_message_to_round" StoreEntitySet="ad_message">
+      <EndProperty Name="round">
+        <ScalarProperty Name="id" ColumnName="round_id" />
+      </EndProperty>
+      <EndProperty Name="ad_message">
+        <ScalarProperty Name="id" ColumnName="id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

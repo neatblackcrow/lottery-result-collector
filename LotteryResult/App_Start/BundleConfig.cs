@@ -21,15 +21,38 @@ namespace LotteryResult
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/bootstrap-datepicker.js",
-                      "~/Scripts/locales/bootstrap-datepicker.th.min.js",
-                      "~/Scripts/Site.js"));
+                      "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
+                        "~/Scripts/bootstrap-datepicker.js",
+                        "~/Scripts/moment-with-locales.min.js",
+                        "~/Scripts/locales/bootstrap-datepicker.th.min.js",
+                        "~/Scripts/bootstrap-datepicker-defaults.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ad-message-validator").Include(
+                        "~/Scripts/admessage-validator.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap-datepicker3.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/custom-global").Include(
+                        "~/Scripts/Site.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/react").Include(
+                        "~/Scripts/react.js",
+                        "~/Scripts/react-dom.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/result-data-entry").Include(
+                        "~/Scripts/ReactComponents/Round.jsx",
+                        "~/Scripts/ReactComponents/DataEntryRoot.jsx"));
+
+            bundles.Add(new ScriptBundle("~/bundles/result-data-admin").Include(
+                        "~/Scripts/ReactComponents/*.jsx"));
+
+            // Minify the scripts for production usages.
+            // BundleTable.EnableOptimizations = true;
         }
     }
 }

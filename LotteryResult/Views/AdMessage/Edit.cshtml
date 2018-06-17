@@ -10,22 +10,33 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ข้อความโฆษณา</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
-        @Html.HiddenFor(model => model.date)
-        @Html.HiddenFor(model => model.round1)
-        @Html.HiddenFor(model => model.create_by)
-        @Html.HiddenFor(model => model.create_timestamp)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.advertise_msg, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.advertise_msg, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.advertise_msg, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.date, "{0:d/M/yyyy}", htmlAttributes: new { @class = "form-control col-md-2", @readonly = true })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.round1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.round1, htmlAttributes: new { @class = "form-control col-md-2", @readonly = true })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ad_message.advertise_msg, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ad_message.advertise_msg, htmlAttributes: new { @class = "form-control", row = "5", @id = "text_area" })
+                @Html.ValidationMessageFor(model => model.ad_message.advertise_msg, "", new { @class = "text-danger" })
+                <span id="text_counter">เหลือ 250 คำ</span>
             </div>
         </div>
 
@@ -40,3 +51,7 @@
 <div>
     @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/ad-message-validator")
+}

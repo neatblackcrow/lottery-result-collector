@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("สร้าง", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.user.username)
@@ -20,9 +20,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.round1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.advertise_msg)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.create_timestamp)
@@ -40,9 +37,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.round1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.advertise_msg)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.create_timestamp)

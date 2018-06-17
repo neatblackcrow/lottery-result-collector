@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="454d92e63e3347968306421e1e02e5e7" Name="Diagram1" ZoomLevel="91">
+        <EntityTypeShape EntityType="Models.result" Width="1.5" PointX="8.875" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.reward_type" Width="1.5" PointX="5.625" PointY="8.625" IsExpanded="true" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Models.role" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Models.round" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" FillColor="255, 128, 128" />
+        <EntityTypeShape EntityType="Models.user" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" FillColor="255, 128, 128" />
+        <AssociationConnector Association="Models.FK_result_to_reward_type" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_result_to_round" ManuallyRouted="true" >
+          <ConnectorPoint PointX="6.75" PointY="13.922345199472179" />
+          <ConnectorPoint PointX="10.34375" PointY="13.922345199472179" />
+          <ConnectorPoint PointX="10.34375" PointY="13.182190755208334" />
+        </AssociationConnector>
+        <AssociationConnector Association="Models.FK_reward_type_to_user" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_user_to_role" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_round_to_user" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Models.result_data" Width="1.5" PointX="11.75" PointY="10" />
+        <AssociationConnector Association="Models.FK_result_data_to_result" />
+        <AssociationConnector Association="Models.FK_result_data_to_user" />
+        <EntityTypeShape EntityType="Models.ad_message" Width="1.5" PointX="8.75" PointY="14.875" />
+        <AssociationConnector Association="Models.FK_ad_message_to_round" />
+        <AssociationConnector Association="Models.FK_ad_message_to_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
