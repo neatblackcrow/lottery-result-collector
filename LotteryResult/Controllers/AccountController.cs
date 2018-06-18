@@ -16,7 +16,8 @@ namespace LotteryResult.Controllers
 
         private LottoResultContext _dbContext = new LottoResultContext();
 
-        // GET
+        // GET Account/Redirector
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Redirector()
         {
@@ -47,14 +48,15 @@ namespace LotteryResult.Controllers
             return RedirectToAction("LogIn");
         }
 
-        // GET
+        // GET Account/LogIn
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult LogIn()
         {
             return View();
         }
 
-        // POST
+        // POST Account/LogIn
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -109,6 +111,7 @@ namespace LotteryResult.Controllers
             }
         }
 
+        // POST Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

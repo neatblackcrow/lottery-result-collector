@@ -19,24 +19,32 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: User
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_dbContext.user.ToArray());
         }
 
         // GET: User/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+
             user u = _dbContext.user.Find(id);
 
             if (u == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(u);
         }
 
         // GET: User/Create
+        [HttpGet]
         public ActionResult Create()
         {
             ViewBag.role_id = generateRoleListItem();
@@ -79,14 +87,19 @@ namespace LotteryResult.Controllers
         }
 
         // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
 
             user u = _dbContext.user.Find(id);
 
             if (u == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             else
             {
@@ -137,7 +150,8 @@ namespace LotteryResult.Controllers
             }
         }
 
-        // GET: User/Edit/5
+        // GET: User/Edit
+        [HttpGet]
         public ActionResult UserEdit()
         {
 
@@ -197,13 +211,19 @@ namespace LotteryResult.Controllers
         }
 
         // GET: User/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+
             user u = _dbContext.user.Find(id);
 
             if (u == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(u);
         }

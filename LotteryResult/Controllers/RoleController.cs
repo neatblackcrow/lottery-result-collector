@@ -17,24 +17,32 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: Role
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_dbContext.role.ToArray());
         }
 
         // GET: Role/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+
             role r = _dbContext.role.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }
 
         // GET: Role/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -67,13 +75,19 @@ namespace LotteryResult.Controllers
         }
 
         // GET: Role/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+
             role r = _dbContext.role.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }
@@ -106,13 +120,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: Role/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
+
             role r = _dbContext.role.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }

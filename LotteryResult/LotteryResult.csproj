@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdMessageController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\RewardTypeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -422,7 +423,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
@@ -456,11 +456,12 @@
     <Content Include="Views\Result\DataAdminRoundSelect.cshtml" />
     <Content Include="Views\Result\DataAdminCrossCheck.cshtml" />
     <Content Include="Views\Result\DataAdminRewardTypeSelect.cshtml" />
+    <Content Include="Views\Shared\Error_404.cshtml" />
+    <Content Include="Views\Shared\Error_500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\JsonModels\" />
-    <Folder Include="Views\test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

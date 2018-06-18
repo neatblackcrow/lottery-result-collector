@@ -14,31 +14,42 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: AdMessage
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_dbContext.round.ToArray());
         }
 
         // GET: AdMessage/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }
 
         // GET: AdMessage/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             else
             {
@@ -88,13 +99,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: AdMessage/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }

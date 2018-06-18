@@ -17,24 +17,31 @@ namespace LotteryResult.Controllers
 
         // GET: Round
         //[Authorize (Roles = "กองออกรางวัล")]
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_dbContext.round.ToArray());
         }
 
         // GET: Round/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }
 
         // GET: Round/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -71,14 +78,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: Round/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             else
             {
@@ -118,13 +129,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: Round/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             round r = _dbContext.round.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }

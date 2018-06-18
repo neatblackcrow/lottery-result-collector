@@ -15,26 +15,32 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: RewardType
+        [HttpGet]
         public ActionResult Index()
         {
             return View(_dbContext.reward_type.ToArray());
         }
 
         // GET: RewardType/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details(int? id)
         {
-
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             reward_type r = _dbContext.reward_type.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
 
         }
 
         // GET: RewardType/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -71,14 +77,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: RewardType/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(int? id)
         {
-
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             reward_type r = _dbContext.reward_type.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             else
             {
@@ -121,13 +131,18 @@ namespace LotteryResult.Controllers
         }
 
         // GET: RewardType/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException(404, "Not found");
+            }
             reward_type r = _dbContext.reward_type.Find(id);
 
             if (r == null)
             {
-                return RedirectToAction("Index");
+                throw new HttpException(404, "Not found");
             }
             return View(r);
         }
