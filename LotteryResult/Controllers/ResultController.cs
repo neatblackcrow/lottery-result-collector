@@ -19,6 +19,7 @@ namespace LotteryResult.Controllers
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: Result
+        [HttpGet]
         public ActionResult Index()
         {
             var results = from rs in _dbContext.result
@@ -144,6 +145,44 @@ namespace LotteryResult.Controllers
                 });
             }
             
+        }
+
+        // POST: Result/WaitForRewardType
+        [HttpPost]
+        public JsonResult WaitForRewardType()
+        {
+
+            ResultCollectionStats rcs = (ResultCollectionStats)HttpContext.Application["result_collection_stats"];
+            if (rcs.currentRound != null && rcs.currentReward != null)
+            {
+                return Json(new { status = "ready"});
+            }
+            else
+            {
+                return Json(new { status = "not-ready" });
+            }
+
+        }
+
+        // POST: Result/GetRoundAndRewardType
+        [HttpPost]
+        public JsonResult GetRoundAndRewardType()
+        {
+            ResultCollectionStats rcs = (ResultCollectionStats)HttpContext.Application["result_collection_stats"];
+
+            return Json(new {
+                round = new {
+                    date = rcs.currentRound.date.ToString("dd-MM-yyyy"),
+                    round = rcs.currentRound.round1
+                },
+                rewardType = new {
+                    rcs.currentReward.name,
+                    rcs.currentReward.instance,
+                    rcs.currentReward.format,
+                    rcs.currentReward.reward_amount
+                }
+            });
+
         }
 
         // GET: Result/Edit/5

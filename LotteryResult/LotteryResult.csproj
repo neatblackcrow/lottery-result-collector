@@ -404,10 +404,13 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\ReactComponents\DataEntryPreload.jsx" />
-    <Content Include="Scripts\ReactComponents\DataEntryRoot.jsx" />
-    <Content Include="Scripts\ReactComponents\RewardType.jsx" />
-    <Content Include="Scripts\ReactComponents\Round.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultCollection.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultEntry.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultEntryInsert.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultEntryPreload.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultEntryRoot.jsx" />
+    <Content Include="Scripts\ReactComponents\RewardTypeBox.jsx" />
+    <Content Include="Scripts\ReactComponents\RoundBox.jsx" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Site.js" />
@@ -461,7 +464,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\JsonModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

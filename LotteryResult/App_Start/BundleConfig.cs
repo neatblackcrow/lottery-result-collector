@@ -45,8 +45,13 @@ namespace LotteryResult
                         "~/Scripts/react-dom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/result-data-entry").Include(
-                        "~/Scripts/ReactComponents/Round.jsx",
-                        "~/Scripts/ReactComponents/DataEntryRoot.jsx"));
+                        "~/Scripts/ReactComponents/ResultEntry.jsx",
+                        "~/Scripts/ReactComponents/ResultCollection.jsx",
+                        "~/Scripts/ReactComponents/RewardTypeBox.jsx",
+                        "~/Scripts/ReactComponents/RoundBox.jsx",
+                        "~/Scripts/ReactComponents/ResultEntryInsert.jsx",
+                        "~/Scripts/ReactComponents/ResultEntryPreload.jsx",
+                        "~/Scripts/ReactComponents/ResultEntryRoot.jsx"));
 
             bundles.Add(new ScriptBundle("~/bundles/result-data-admin").Include(
                         "~/Scripts/ReactComponents/*.jsx"));
