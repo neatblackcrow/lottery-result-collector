@@ -44,5 +44,8 @@ namespace LotteryResult.Models
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "error_msg_isactive")]
         [Display(ResourceType = typeof(Resources), Name = "display_name_is_active")]
         bool is_active { get; set; }
+
+        [Display(ResourceType = typeof(Resources), Name = "display_name_reward_code")]
+        int? reward_code { get; set; }
     }
 }

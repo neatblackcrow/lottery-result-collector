@@ -12,8 +12,8 @@
         <EntityTypeShape EntityType="Models.user" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" FillColor="255, 128, 128" />
         <AssociationConnector Association="Models.FK_result_to_reward_type" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_result_to_round" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6.75" PointY="13.922345199472179" />
-          <ConnectorPoint PointX="10.34375" PointY="13.922345199472179" />
+          <ConnectorPoint PointX="6.75" PointY="13.997345877604165" />
+          <ConnectorPoint PointX="10.34375" PointY="13.997345877604165" />
           <ConnectorPoint PointX="10.34375" PointY="13.182190755208334" />
         </AssociationConnector>
         <AssociationConnector Association="Models.FK_reward_type_to_user" ManuallyRouted="false" />

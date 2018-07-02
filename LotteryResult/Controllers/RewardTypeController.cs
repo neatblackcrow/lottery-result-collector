@@ -9,7 +9,7 @@ using LotteryResult.Models;
 
 namespace LotteryResult.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ผู้ดูแลระบบ,กองออกรางวัล")]
     public class RewardTypeController : Controller
     {
         private LottoResultContext _dbContext = new LottoResultContext();
@@ -113,6 +113,7 @@ namespace LotteryResult.Controllers
                     changingReward.format = r.format;
                     changingReward.reward_amount = r.reward_amount;
                     changingReward.is_active = r.is_active;
+                    changingReward.reward_code = r.reward_code;
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -167,6 +168,8 @@ namespace LotteryResult.Controllers
                 if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
                 {
                     var rewardType = _dbContext.reward_type.Find(id);
+                    _dbContext.Entry(rewardType).State = System.Data.Entity.EntityState.Unchanged;
+
                     ModelState.AddModelError("", "ไม่สามารถลบประเภทรางวัลได้ เนื่องจากประเภทรางวัลได้ถูกใช้ในระบบเรียบร้อยแล้ว ให้ปิดใช้งานประเภทรางวัลแทน");
                     return View(rewardType);
                 }

@@ -7,9 +7,14 @@
 
 <h2>รายการบทบาท</h2>
 
-<p>
-    @Html.ActionLink("สร้าง", "Create")
-</p>
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6">
+        <a href="@Url.Action("Create")" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> สร้าง
+        </a>
+    </div>
+</div>
+
 <table class="table table-bordered table-striped">
     <tr>
         <th>

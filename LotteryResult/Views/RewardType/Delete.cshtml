@@ -62,9 +62,17 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.reward_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reward_code)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.is_active)
         </dt>
-        
+
         <dd>
             @Html.DisplayFor(model => model.is_active)
         </dd>
@@ -75,7 +83,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="ยืนยัน" class="btn btn-default" /> |
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ยืนยัน
+            </button> |
             @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")
         </div>
     }

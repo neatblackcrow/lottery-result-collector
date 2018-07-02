@@ -9,11 +9,20 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     @HttpContext.Current.User.Identity.Name <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>@Html.ActionLink("แก้ไขข้อมูลผู้ใช้", "UserEdit", "User", routeValues: new { }, htmlAttributes: new { @class = "dropdown-item" })</li>
-                    <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">ออกจากระบบ</a></li>
+                    <li>
+                        <a class="dropdown-item" href="@Url.Action("UserEdit", "User")">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> แก้ไขข้อมูลผู้ใช้
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> ออกจากระบบ
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -22,6 +31,10 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("เข้าสู่ระบบ", "LogIn", "Account")</li>
+        <li>
+            <a href="@Url.Action("LogIn", "Account")">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> เข้าสู่ระบบ
+            </a>
+        </li>
     </ul>
 }

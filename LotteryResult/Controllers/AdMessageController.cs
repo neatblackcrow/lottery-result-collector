@@ -1,13 +1,14 @@
 ﻿using LotteryResult.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace LotteryResult.Controllers
 {
-    [Authorize]
+    [Authorize (Roles = "ผู้ดูแลระบบ,ประชาสัมพันธ์")]
     public class AdMessageController : Controller
     {
 
@@ -15,9 +16,31 @@ namespace LotteryResult.Controllers
 
         // GET: AdMessage
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? year)
         {
-            return View(_dbContext.round.ToArray());
+            IEnumerable<round> roundList;
+            if (year == null)
+            {
+                year = Int32.Parse(DateTime.Now.ToString("yyyy", new CultureInfo("en-US")));
+            }
+
+            roundList = (from r in _dbContext.round
+                         where r.date.Year == year
+                         select r).ToList();
+
+            var roundQuery = (from r in _dbContext.round
+                              select r.date);
+
+            List<SelectListItem> yearSelectItemList = new List<SelectListItem>();
+
+            foreach (DateTime eachDate in roundQuery.ToList())
+            {
+                yearSelectItemList.Add(new SelectListItem() { Text = eachDate.ToString("yyyy", new CultureInfo("th-TH")), Value = eachDate.Year.ToString() });
+            }
+
+            ViewBag.year = yearSelectItemList.Distinct(new SelectListItemComparer());
+
+            return View(roundList);
         }
 
         // GET: AdMessage/Details/5

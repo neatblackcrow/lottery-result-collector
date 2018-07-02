@@ -25,11 +25,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (HttpContext.Current.Request.IsAuthenticated && HttpContext.Current.User is GenericPrincipal)
+                    @if (HttpContext.Current.Request.IsAuthenticated)
                     {
                         GenericPrincipal principal = (GenericPrincipal)HttpContext.Current.User;
                         FormsIdentity identity = (FormsIdentity)principal.Identity;
-                        switch (principal.Claims.Where(c => c.Type == identity.RoleClaimType).First().Value)
+                        string role = principal.Claims.Where(c => c.Type == identity.RoleClaimType).First().Value;
+
+                        switch (role)
                         {
                             case "กองออกรางวัล":
                                 <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Round")">
@@ -49,7 +51,7 @@
                                     @Html.ActionLink("ผลรางวัล", "Index", "Result")
                                 </li>
                                 break;
-                            case "ผู้ตรวจสอบการบันทึกผลรางวัล":
+                            case "ผู้ดูแลระบบ":
                                 <li class="@Html.IsActive(actions: "Create,Edit,Delete,Index,Details", controllers: "Result")">
                                     @Html.ActionLink("ผลรางวัล", "Index", "Result")
                                 </li>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LotteryResult.Controllers
 {
@@ -27,5 +28,18 @@ namespace LotteryResult.Controllers
             return sBuilder.ToString();
         }
 
+    }
+
+    public class SelectListItemComparer : IEqualityComparer<SelectListItem>
+    {
+        public bool Equals(SelectListItem x, SelectListItem y)
+        {
+            return x.Text.Equals(y.Text);
+        }
+
+        public int GetHashCode(SelectListItem obj)
+        {
+            return obj.Text.GetHashCode();
+        }
     }
 }

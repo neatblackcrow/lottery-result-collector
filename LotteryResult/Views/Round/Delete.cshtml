@@ -11,6 +11,8 @@
 <div>
     <h4>ข้อมูลงวด</h4>
     <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.user.username)
@@ -44,13 +46,24 @@
             @Html.DisplayFor(model => model.create_timestamp)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.is_active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_active)
+        </dd>
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="ยืนยัน" class="btn btn-default" /> |
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> ยืนยัน
+            </button> |
             @Html.ActionLink("ย้อนกลับไปที่รายการ", "Index")
         </div>
     }

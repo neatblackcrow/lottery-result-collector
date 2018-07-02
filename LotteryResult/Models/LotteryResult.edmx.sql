@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/11/2018 01:22:48
+-- Date Created: 06/29/2018 09:07:43
 -- Generated from EDMX file: D:\Documents\Visual Studio 2017\Projects\LottoResult\LotteryResult\LotteryResult\Models\LotteryResult.edmx
 -- --------------------------------------------------
 
@@ -94,7 +94,8 @@ CREATE TABLE [dbo].[reward_type] (
     [reward_amount] varchar(50)  NOT NULL,
     [create_timestamp] datetime  NOT NULL,
     [create_by] int  NOT NULL,
-    [is_active] bit  NOT NULL
+    [is_active] bit  NOT NULL,
+    [reward_code] int  NULL
 );
 GO
 
@@ -111,7 +112,8 @@ CREATE TABLE [dbo].[round] (
     [date] datetime  NOT NULL,
     [round1] int  NOT NULL,
     [create_by] int  NOT NULL,
-    [create_timestamp] datetime  NOT NULL
+    [create_timestamp] datetime  NOT NULL,
+    [is_active] bit  NOT NULL
 );
 GO
 
@@ -143,7 +145,7 @@ GO
 -- Creating table 'ad_message'
 CREATE TABLE [dbo].[ad_message] (
     [id] int IDENTITY(1,1) NOT NULL,
-    [advertise_msg] nvarchar(250)  NOT NULL,
+    [advertise_msg] nvarchar(max)  NOT NULL,
     [create_by] int  NOT NULL,
     [create_timestamp] datetime  NOT NULL,
     [round_id] int  NOT NULL

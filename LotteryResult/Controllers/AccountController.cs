@@ -22,7 +22,7 @@ namespace LotteryResult.Controllers
         public ActionResult Redirector()
         {
 
-            if (HttpContext.Request.IsAuthenticated && HttpContext.User is GenericPrincipal)
+            if (Request.IsAuthenticated)
             {
                 GenericPrincipal principal = (GenericPrincipal) HttpContext.User;
                 FormsIdentity identity = (FormsIdentity) principal.Identity;
@@ -38,7 +38,7 @@ namespace LotteryResult.Controllers
                             return RedirectToAction("Index", "AdMessage");
                         case "ผู้บันทึกผลรางวัล":
                             return RedirectToAction("Index", "Result");
-                        case "ผู้ตรวจสอบการบันทึกผลรางวัล":
+                        case "ผู้ดูแลระบบ":
                             return RedirectToAction("Index", "Result");
                     }
                     

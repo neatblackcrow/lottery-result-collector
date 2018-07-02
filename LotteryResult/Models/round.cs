@@ -25,6 +25,7 @@ namespace LotteryResult.Models
         public int round1 { get; set; }
         public int create_by { get; set; }
         public System.DateTime create_timestamp { get; set; }
+        public bool is_active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<result> result { get; set; }

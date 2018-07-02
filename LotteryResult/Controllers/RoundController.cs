@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,18 +10,39 @@ using LotteryResult.Models;
 
 namespace LotteryResult.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ผู้ดูแลระบบ,กองออกรางวัล")]
     public class RoundController : Controller
     {
 
         private LottoResultContext _dbContext = new LottoResultContext();
 
         // GET: Round
-        //[Authorize (Roles = "กองออกรางวัล")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? year)
         {
-            return View(_dbContext.round.ToArray());
+            IEnumerable<round> roundList;
+            if (year == null)
+            {
+                year = Int32.Parse(DateTime.Now.ToString("yyyy", new CultureInfo("en-US")));
+            }
+
+            roundList = (from r in _dbContext.round
+                         where r.date.Year == year
+                         select r).ToList();
+
+            var roundQuery = (from r in _dbContext.round
+                              select r.date);
+
+            List<SelectListItem> yearSelectItemList = new List<SelectListItem>();
+
+            foreach (DateTime eachDate in roundQuery.ToList())
+            {
+                yearSelectItemList.Add(new SelectListItem() { Text = eachDate.ToString("yyyy", new CultureInfo("th-TH")), Value = eachDate.Year.ToString() });
+            }
+
+            ViewBag.year = yearSelectItemList.Distinct(new SelectListItemComparer());
+
+            return View(roundList);
         }
 
         // GET: Round/Details/5
@@ -111,6 +133,7 @@ namespace LotteryResult.Controllers
 
                     changingRound.date = r.date;
                     changingRound.round1 = r.round1;
+                    changingRound.is_active = r.is_active;
 
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -160,20 +183,10 @@ namespace LotteryResult.Controllers
             }
             catch (DbUpdateException exception)
             {
-                SqlException ex = (SqlException)exception.InnerException.InnerException;
-
-                if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
-                {
-                    var round = _dbContext.round.Find(id);
-                    ModelState.AddModelError("", "ไม่สามารถลบงวดได้ เนื่องจากงวดได้ถูกใช้ในระบบเรียบร้อยแล้ว");
-                    return View(round);
-                }
-                else
-                {
-                    var round = _dbContext.round.Find(id);
-                    ModelState.AddModelError("", ex.Message);
-                    return View(round);
-                }
+                var round = _dbContext.round.Find(id);
+                _dbContext.Entry(round).State = System.Data.Entity.EntityState.Unchanged;
+                ModelState.AddModelError("", "ไม่สามารถลบงวดได้ เนื่องจากงวดได้ถูกใช้ในระบบเรียบร้อยแล้ว ให้ปิดใช้งานประเภทรางวัลแทน");
+                return View(round);
             }
             catch (Exception ex)
             {

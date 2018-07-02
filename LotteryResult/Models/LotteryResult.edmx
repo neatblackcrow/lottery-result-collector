@@ -72,6 +72,7 @@
     <Property Name="create_timestamp" Type="datetime" Nullable="false" />
     <Property Name="create_by" Type="int" Nullable="false" />
     <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="reward_code" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="role">
     <Key>
@@ -89,6 +90,7 @@
     <Property Name="round1" Type="int" Nullable="false" />
     <Property Name="create_by" Type="int" Nullable="false" />
     <Property Name="create_timestamp" Type="datetime" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -120,7 +122,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="advertise_msg" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="advertise_msg" Type="nvarchar(max)" Nullable="false" />
     <Property Name="create_by" Type="int" Nullable="false" />
     <Property Name="create_timestamp" Type="datetime" Nullable="false" />
     <Property Name="round_id" Type="int" Nullable="false" />
@@ -264,6 +266,7 @@
           <NavigationProperty Name="result" Relationship="Self.FK_result_to_reward_type" FromRole="reward_type" ToRole="result" />
           <NavigationProperty Name="user" Relationship="Self.FK_reward_type_to_user" FromRole="reward_type" ToRole="user" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="reward_code" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -285,6 +288,7 @@
           <NavigationProperty Name="result" Relationship="Self.FK_result_to_round" FromRole="round" ToRole="result" />
           <NavigationProperty Name="user" Relationship="Self.FK_round_to_user" FromRole="round" ToRole="user" />
           <NavigationProperty Name="ad_message" Relationship="Models.FK_ad_message_to_round" FromRole="round" ToRole="ad_message" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -452,7 +456,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="advertise_msg" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="advertise_msg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="create_by" Type="Int32" Nullable="false" />
           <Property Name="create_timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="round" Relationship="Models.FK_ad_message_to_round" FromRole="ad_message" ToRole="round" />
@@ -502,6 +506,7 @@
           <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
           <ScalarProperty Name="create_by" ColumnName="create_by" />
           <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="reward_code" ColumnName="reward_code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -521,6 +526,7 @@
           <ScalarProperty Name="round1" ColumnName="round1" />
           <ScalarProperty Name="create_by" ColumnName="create_by" />
           <ScalarProperty Name="create_timestamp" ColumnName="create_timestamp" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -20,6 +20,7 @@ namespace LotteryResult.Controllers
 
         // GET: User
         [HttpGet]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Index()
         {
             return View(_dbContext.user.ToArray());
@@ -27,6 +28,7 @@ namespace LotteryResult.Controllers
 
         // GET: User/Details/5
         [HttpGet]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,6 +47,7 @@ namespace LotteryResult.Controllers
 
         // GET: User/Create
         [HttpGet]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Create()
         {
             ViewBag.role_id = generateRoleListItem();
@@ -55,6 +58,7 @@ namespace LotteryResult.Controllers
         // POST: User/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Create(user u)
         {
             u.create_timestamp = DateTime.Now;
@@ -88,6 +92,7 @@ namespace LotteryResult.Controllers
 
         // GET: User/Edit/5
         [HttpGet]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,6 +119,7 @@ namespace LotteryResult.Controllers
         // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Edit(int id, user u)
         {
             if (ModelState.IsValid)
@@ -212,6 +218,7 @@ namespace LotteryResult.Controllers
 
         // GET: User/Delete/5
         [HttpGet]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -231,6 +238,7 @@ namespace LotteryResult.Controllers
         // POST: User/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ผู้ดูแลระบบ")]
         public ActionResult Delete(int id, user u)
         {
             try
@@ -248,6 +256,7 @@ namespace LotteryResult.Controllers
                 if (ex.Errors.Count > 0 && ex.Errors[0].Number == 547)
                 {
                     var user = _dbContext.user.Find(id);
+                    _dbContext.Entry(user).State = System.Data.Entity.EntityState.Unchanged;
                     ModelState.AddModelError("", "ไม่สามารถลบผู้ใช้ได้ เนื่องจากผู้ใช้ได้สร้างข้อมูลในระบบเรียบร้อยแล้ว ให้ปิดใช้งานผู้ใช้แทน");
                     return View(user);
                 }

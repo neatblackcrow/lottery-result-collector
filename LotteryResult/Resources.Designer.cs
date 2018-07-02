@@ -196,6 +196,15 @@ namespace LotteryResult {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to รหัสรางวัล.
+        /// </summary>
+        public static string display_name_reward_code {
+            get {
+                return ResourceManager.GetString("display_name_reward_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to รูปแบบของข้อมูลรางวัล.
         /// </summary>
         public static string display_name_reward_format {
@@ -241,7 +250,7 @@ namespace LotteryResult {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to งวด.
+        ///   Looks up a localized string similar to งวดที่.
         /// </summary>
         public static string display_name_round {
             get {
@@ -268,7 +277,7 @@ namespace LotteryResult {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ข้อความโฆษณาจะต้องมีความยาวไม่เกิน 250 ตัวอักษร.
+        ///   Looks up a localized string similar to ข้อความโฆษณาจะต้องมีความยาวไม่เกิน 5,000 ตัวอักษร.
         /// </summary>
         public static string error_msg_ad_msg_length {
             get {
@@ -475,7 +484,7 @@ namespace LotteryResult {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to งวดจะต้องมีค่าระหว่าง 1 ถึง 52.
+        ///   Looks up a localized string similar to งวดจะต้องมีค่าระหว่าง 1 ถึง 24.
         /// </summary>
         public static string error_msg_round_range {
             get {

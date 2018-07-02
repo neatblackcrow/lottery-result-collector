@@ -1,6 +1,6 @@
 ﻿var textCounter = $('#text_counter');
 var textArea = $('#text_area');
-var maxChar = 250;
+var maxChar = 5000;
 
 var remainingChar = function () {
     return maxChar - textArea.val().length;

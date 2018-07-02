@@ -10,7 +10,7 @@ using LotteryResult.Models;
 
 namespace LotteryResult.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ผู้ดูแลระบบ")]
     public class RoleController : Controller
     {
 

@@ -1,4 +1,4 @@
-﻿class ResultEntryInsert extends React.Component {
+﻿class ResultAdminRoot extends React.Component {
 
     constructor(props) {
         super(props);
@@ -48,16 +48,21 @@
 
     render() {
         return (
-                <div className="row">
-                    <div className="col-md-3">
-                        <RoundBox round={this.state.round} />
-                        <RewardTypeBox rewardType={this.state.rewardType} />
-                    </div>
-                    <div className="col-md-9">
-                        <ResultEntryInput round={this.state.round} rewardType={this.state.rewardType} addResultEntry={this.addResultEntry} toggleState={this.props.toggleState}/>
-                        <ResultCollection resultEntries={this.state.resultEntries} />
-                    </div>
+            <div className="row">
+                <div className="col-md-3">
+                    <RoundBox round={this.state.round} />
+                    <RewardTypeBox rewardType={this.state.rewardType} />
                 </div>
-            );
+                <div className="col-md-9">
+                    <ResultAdminValidate round={this.state.round} rewardType={this.state.rewardType} addResultEntry={this.addResultEntry} />
+                    <ResultCollection resultEntries={this.state.resultEntries} />
+                </div>
+            </div>
+        );
     }
 }
+
+ReactDOM.render(
+    <ResultAdminRoot />,
+    document.getElementById('ResultAdminRoot')
+);

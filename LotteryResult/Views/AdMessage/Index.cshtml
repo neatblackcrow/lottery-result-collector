@@ -7,6 +7,25 @@
 
 <h2>รายการข้อความโฆษณา</h2>
 
+<div class="row" style="margin-bottom: 10px;">
+
+    <div class="col-md-6 col-md-offset-6">
+        @using (Html.BeginForm("Index", "AdMessage", FormMethod.Get))
+        {
+            <div class="form-inline text-right">
+                <div class="form-group">
+                    @Html.Label("ประจำปี: ", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("year", null, htmlAttributes: new { @class = "form-control" , @style = "width: auto;" })
+                </div>
+
+                <button type="submit" value="" class="btn btn-default">
+                    <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
 <table class="table table-bordered table-striped">
     <tr>
         <th>

@@ -47,6 +47,7 @@ namespace LotteryResult
             bundles.Add(new ScriptBundle("~/bundles/result-data-entry").Include(
                         "~/Scripts/ReactComponents/ResultEntry.jsx",
                         "~/Scripts/ReactComponents/ResultCollection.jsx",
+                        "~/Scripts/ReactComponents/ResultEntryInput.jsx",
                         "~/Scripts/ReactComponents/RewardTypeBox.jsx",
                         "~/Scripts/ReactComponents/RoundBox.jsx",
                         "~/Scripts/ReactComponents/ResultEntryInsert.jsx",
@@ -54,7 +55,13 @@ namespace LotteryResult
                         "~/Scripts/ReactComponents/ResultEntryRoot.jsx"));
 
             bundles.Add(new ScriptBundle("~/bundles/result-data-admin").Include(
-                        "~/Scripts/ReactComponents/*.jsx"));
+                        "~/Scripts/ReactComponents/ResultEntry.jsx",
+                        "~/Scripts/ReactComponents/ResultCollection.jsx",
+                        "~/Scripts/ReactComponents/ResultCard.jsx",
+                        "~/Scripts/ReactComponents/ResultAdminValidate.jsx",
+                        "~/Scripts/ReactComponents/RewardTypeBox.jsx",
+                        "~/Scripts/ReactComponents/RoundBox.jsx",
+                        "~/Scripts/ReactComponents/ResultAdminRoot.jsx"));
 
             // Minify the scripts for production usages.
             // BundleTable.EnableOptimizations = true;

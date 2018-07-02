@@ -7,9 +7,30 @@
 
 <h2>รายการงวด</h2>
 
-<p>
-    @Html.ActionLink("สร้าง", "Create")
-</p>
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6">
+        <a href="@Url.Action("Create")" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> สร้าง
+        </a>
+    </div>
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "Round", FormMethod.Get))
+        {
+            <div class="form-inline text-right">
+                <div class="form-group">
+                    @Html.Label("ประจำปี: ", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("year", null, htmlAttributes: new { @class = "form-control", @style = "width: auto;" })
+
+                </div>
+                <button type="submit" value="" class="btn btn-default">
+                    <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
 <table class="table table-bordered table-striped">
     <tr>
         <th>
@@ -24,29 +45,36 @@
         <th>
             @Html.DisplayNameFor(model => model.create_timestamp)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_active)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.user.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.round1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.create_timestamp)
-        </td>
-        <td>
-            @Html.ActionLink("แก้ไข", "Edit", new { id=item.id }) |
-            @Html.ActionLink("รายละเอียด", "Details", new { id=item.id }) |
-            @Html.ActionLink("ลบ", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.round1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.is_active)
+            </td>
+            <td>
+                @Html.ActionLink("แก้ไข", "Edit", new { id = item.id }) |
+                @Html.ActionLink("รายละเอียด", "Details", new { id = item.id }) |
+                @Html.ActionLink("ลบ", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

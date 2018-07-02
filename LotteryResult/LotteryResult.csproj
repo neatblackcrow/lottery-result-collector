@@ -211,6 +211,7 @@
     <Compile Include="Models\ad_message.cs">
       <DependentUpon>LotteryResult.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JsonModels\ResultInsert.cs" />
     <Compile Include="Models\LotteryResult.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,8 +405,12 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ReactComponents\ResultAdminValidate.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultCard.jsx" />
     <Content Include="Scripts\ReactComponents\ResultCollection.jsx" />
     <Content Include="Scripts\ReactComponents\ResultEntry.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultEntryInput.jsx" />
+    <Content Include="Scripts\ReactComponents\ResultAdminRoot.jsx" />
     <Content Include="Scripts\ReactComponents\ResultEntryInsert.jsx" />
     <Content Include="Scripts\ReactComponents\ResultEntryPreload.jsx" />
     <Content Include="Scripts\ReactComponents\ResultEntryRoot.jsx" />

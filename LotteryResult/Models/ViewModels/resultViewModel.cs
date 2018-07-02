@@ -12,6 +12,7 @@ namespace LotteryResult.Models.ViewModels
         public int result_id { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "display_name_date")]
+        [DataType(DataType.Date)]
         public System.DateTime round_date { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "display_name_round")]

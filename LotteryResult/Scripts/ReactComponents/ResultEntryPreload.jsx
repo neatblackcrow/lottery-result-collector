@@ -20,21 +20,18 @@
 
             $.ajax({
                 url: "WaitForRewardType",
-                method: "POST"
+                method: "GET"
             }).success((data, textStatus, jqXHR) => {
 
-                if (data.status == "ready") {
+                if (data.message == "ready") {
                     this.props.toggleState();
                 }
-                else if (data.status == "not-ready") {
+                else if (data.message == "not-ready") {
 
                     this.setState({
                         countDown: 3
                     });
                     this.timer = window.setInterval(this.preloadCountDown, 1000);
-                }
-                else if (data.status == "finished") {
-
                 }
 
             });

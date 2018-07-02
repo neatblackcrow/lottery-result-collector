@@ -7,9 +7,45 @@
 
 <h2>รายการผลรางวัล</h2>
 
-<p>
-    @Html.ActionLink("สร้าง", "Create")
-</p>
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6">
+        <a href="@Url.Action("Create")" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> สร้าง
+        </a>
+        <a href="@Url.Action("CreateResultTxt")" class="btn btn-default">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> สร้างแฟ้มข้อมูล result.txt
+        </a>
+        <a href="@Url.Action("CreateResultExcel")" class="btn btn-default">
+            <span class="glyphicon glyphicon-list" aria-hidden="true"></span> สร้างแฟ้มข้อมูล Excel
+        </a>
+    </div>
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "Result", FormMethod.Get))
+        {
+        <div class="form-inline text-right">
+            <div class="form-group">
+                @Html.Label("ประจำปี: ", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("year", null, htmlAttributes: new { @class = "form-control", @style = "width: auto;" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("งวดที่: ", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("round", null, htmlAttributes: new { @class = "form-control", @style = "width: auto;" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("ประเภทรางวัล: ", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("reward_type", null, htmlAttributes: new { @class = "form-control", @style = "width: auto;" })
+            </div>
+
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+            </button>
+        </div>
+        }
+    </div>
+</div>
 
 <table class="table table-bordered table-striped">
     <tr>

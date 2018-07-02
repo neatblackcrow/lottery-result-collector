@@ -22,7 +22,7 @@ namespace LotteryResult.Models
         System.DateTime date { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "error_msg_round")]
-        [Range(1, 52, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "error_msg_round_range")]
+        [Range(1, 24, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "error_msg_round_range")]
         [Display(ResourceType = typeof(Resources), Name = "display_name_round")]
         int round1 { get; set; }
 
@@ -31,5 +31,9 @@ namespace LotteryResult.Models
 
         [Display(ResourceType = typeof(Resources), Name = "display_name_create_timestamp")]
         System.DateTime create_timestamp { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "error_msg_isactive")]
+        [Display(ResourceType = typeof(Resources), Name = "display_name_is_active")]
+        bool is_active { get; set; }
     }
 }
